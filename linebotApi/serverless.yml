@@ -7,7 +7,7 @@ plugins:
   - serverless-plugin-optimize
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
   region: ap-northeast-1
   stage: ${opt:stage, self:custom.defaultStage}
   # ApiGateway
@@ -30,7 +30,7 @@ custom:
     bundle: true
     minify: false
     sourcemap: true
-    target: node16
+    target: node18
     define: 'require.resolve: undefined'
     platform: node
     concurrency: 10
@@ -74,7 +74,7 @@ functions:
       LAMBDA_ARN: ${self:custom.otherfile.environment.${self:provider.stage}.LAMBDA_ARN}
       LAMBDA_ROLE: ${self:custom.otherfile.environment.${self:provider.stage}.LAMBDA_ROLE}
       NOW_STAGE: ${self:custom.otherfile.environment.${self:provider.stage}.NOW_STAGE}
-    runtime: nodejs16.x
+    runtime: nodejs18.x
     memorySize: 512
     timeout: 30 #(m)
     tracing: PassThrough # awsの他のサービスを実行するときに、トレース情報を自動的に送信する

@@ -115,6 +115,8 @@ resources:
         AttributeDefinitions:
           - AttributeName: imageId # PK
             AttributeType: S
+          - AttributeName: createdAt # SK
+            AttributeType: N
           # GS
           - AttributeName: userId
             AttributeType: S
@@ -128,9 +130,13 @@ resources:
             AttributeType: N
           - AttributeName: requestType
             AttributeType: S
+          - AttributeName: imageType
+            AttributeType: N
         KeySchema:
           - AttributeName: imageId
             KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
         # GSの設定
         GlobalSecondaryIndexes:
           - IndexName: userIdIndex
@@ -169,6 +175,12 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL # 射影される属性
+          - IndexName: imageTypeIndex
+            KeySchema:
+              - AttributeName: imageType
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL # 射影される属性
         # オンデマンドモードを指定
         BillingMode: PAY_PER_REQUEST
     # ユーザーテーブル
@@ -179,12 +191,12 @@ resources:
         AttributeDefinitions:
           - AttributeName: userId # PK
             AttributeType: S
+          - AttributeName: createdAt # PK
+            AttributeType: N
           # GSI
           - AttributeName: status
             AttributeType: N
           - AttributeName: mode
-            AttributeType: N
-          - AttributeName: createdAt
             AttributeType: N
           - AttributeName: lineId
             AttributeType: S
@@ -195,6 +207,8 @@ resources:
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
         # GSIの設定
         GlobalSecondaryIndexes:
           - IndexName: lineIdIndex
@@ -224,12 +238,6 @@ resources:
           - IndexName: modeIndex
             KeySchema:
               - AttributeName: mode
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL # 射影される属性
-          - IndexName: createdAtIndex
-            KeySchema:
-              - AttributeName: createdAt
                 KeyType: HASH
             Projection:
               ProjectionType: ALL # 射影される属性

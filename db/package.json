@@ -6,7 +6,9 @@
     "scripts": {
         "deploy:dev": "serverless deploy --stage dev --aws-profile irukara-dev --verbose",
         "deploy:stg": "serverless deploy --stage stg --aws-profile irukara-dev --verbose",
-        "deploy:prd": "serverless deploy --stage prd --aws-profile irukara-dev --verbose"
+        "deploy:prd": "serverless deploy --stage prd --aws-profile irukara-dev --verbose",
+        "sls-remove-deploy-dev": "serverless remove --verbose -s dev --aws-profile irukara-dev",
+        "sls-remove-deploy-stg": "serverless remove --verbose -s stg --aws-profile irukara-dev"
     },
     "keywords": [],
     "author": "",

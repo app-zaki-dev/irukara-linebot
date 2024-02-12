@@ -1,9 +1,7 @@
 # LINEBot Irukara
 
-Lambda と APIGateway で Nest.js を動かしています。
-
-有料プランは下記を参照
-https://www.notion.so/369a88cf3862432291ed630b59c5755f
+chatgpt, stable diffusionが使用できるLINEbot
+※リポジトリを移動しました
 
 <br>
 
@@ -29,6 +27,10 @@ npm buildoff でビルドと serverless offline が立ち上がります。
 
 <br>
 
+### デプロイ
+デプロイはCICDを設定していません。
+serverless frameworkで手動デプロイになります。(のちのち修正予定)
+
 ### テスト
 
 ```
@@ -36,14 +38,4 @@ npm buildoff でビルドと serverless offline が立ち上がります。
 http://localhost:6000/dev/linebot
 or
 curl http://localhost:6000/dev/linebot
-```
-
-<br>
-
-### serverless deploy
-
-デプロイ前に Lint を走らせてください
-
-```
-npm run cfn-lint
 ```
